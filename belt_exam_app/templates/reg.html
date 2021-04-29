@@ -1,0 +1,68 @@
+{%extends 'login.html'%} 
+
+{%block content%} 
+{%if messages %}
+<div class="alert alert-primary" role="alert">
+    <ul>
+        {% for msg in messages %} {% ifequal 'error' msg.tags %}
+        <li class="text-danger">{{msg}}</li>
+        {%else%}
+        <li class="text-success">{{msg}}</li>
+        {% endifequal %} {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form action="/register_form" method="POST" name="register_form">
+    {% csrf_token %}
+    <h1 class="">Registration</h1>
+    <div class="form-group row mt-2">
+        <label for="first_name" class="col-md-2 col-form-label">First name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="first_name" />
+            <p class="text-danger">{{errors.first_name}}</p>
+        </div>
+    </div>
+    <p class="" id="fname_error"></p>
+
+    <div class="form-group row mt-2">
+        <label for="last_name" class="col-md-2 col-form-label">Last name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="last_name" />
+            <p class="text-danger">{{errors.last_name}}</p>
+        </div>
+    </div>
+    <p class="" id="lname_error"></p>
+
+    <div class="form-group row mt-2">
+        <label for="inputEmail3" class="col-md-2 col-form-label">Email</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control" name="email" />
+            <p class="text-danger">{{errors.email}}</p>
+        </div>
+    </div>
+    <p class="" id="email_error"></p>
+
+    <div class="form-group row mt-2">
+        <label for="inputEmail3" class="col-md-2 col-form-label">Password</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" name="password" id="pass_id" />
+            <p class="text-danger">{{errors.password}}</p>
+        </div>
+    </div>
+    <p class="" id="pass_error"></p>
+    <div class="form-group row mt-2">
+        <label for="inputEmail3" class="col-md-2 col-form-label">Confirm PW</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" name="confirm_pw" />
+            <p class="text-danger">{{errors.confirm_pw}}</p>
+        </div>
+    </div>
+    <p class="" id="confpw_error"></p>
+
+    <button type="submit" class="btn btn-primary mt-4 mb-4">Register</button>
+    <br/>
+    <a href="/login">Back to Login!</a>
+</form>
+
+{% endblock %}

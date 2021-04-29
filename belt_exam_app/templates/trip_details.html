@@ -1,0 +1,30 @@
+{%extends 'home.html'%}
+
+{%block content%}
+
+<div class="float-right">
+    <a href="/" class="btn btn-info pl-5 pr-5 mt-4 text-white">Dashboard</a>
+</div>
+<br />
+<h2>Hello {{user.first_name}}! Read about this trip!</h2>
+<h4 class="mt-4">{{trip.dest}}</h4>
+<div class=" container border border-dark p-3">
+    <p>Sart date at: {{trip.start_date}}</p>
+    <p>End date at: {{trip.end_date}}</p>
+    <p>Created on: {{trip.created_at}}</p>
+    <p>Last updated at: {{trip.updated_at}}</p>
+    <p>Plan is: {{trip.plan}}</p>
+    <p>Created py: {{trip.created_by.first_name}} {{trip.created_by.last_name}}</p>
+</div>
+<br />
+<div class="border border-info  p-3">
+    <p>People who joined this trip:</p>
+    {% for us in trip.users_who_join.all %}
+    <ul>
+        <li>{{us.first_name}} {{us.last_name}}
+    </ul>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

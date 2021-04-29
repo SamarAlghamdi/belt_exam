@@ -1,0 +1,34 @@
+{%extends 'home.html'%}
+
+{%block content%}
+
+<h2>Hello {{user.first_name}}! Let's edit your trip!</h1>
+    {%if messages %}
+            <ul>
+                {% for msg in messages %}
+                <li class="text-danger">{{msg}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <br/>
+    <div class="container">
+        <form action="/trips/edit/{{trip.id}}/edit_trip_form" class="mt-4" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <h5>Destination: <input name="dest" type="text" value="{{trip.dest}}"></h5>
+            </div>
+            <div class="form-group">
+                <h5>Start Date:<input name="start_date" type="date" value="{{trip.start_date|date:'Y-m-d'}}"></h5>
+            </div>
+            <div class="form-group">
+                <h5>End Date: <input name="end_date" type="date" value="{{trip.end_date|date:'Y-m-d'}}"></h5>
+            </div>
+            <div class="form-group">
+                <h5>Plan: <textarea name="plan"> {{trip.plan}}</textarea></h5>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/" class="btn btn-outline-danger">Cancel</a>
+        </form>
+    </div>
+
+    {% endblock %}
